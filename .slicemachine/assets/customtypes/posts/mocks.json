@@ -1,0 +1,81 @@
+{
+  "id": "48ccf561-7b52-4f4b-ad55-6a5ce6842952",
+  "uid": "eum-qui-saepe",
+  "type": "posts",
+  "data": {
+    "title": "redefine front-end paradigms",
+    "subtitle": "utilize sexy e-business",
+    "author": "benchmark out-of-the-box schemas",
+    "banner": {
+      "dimensions": {
+        "width": 900,
+        "height": 500
+      },
+      "alt": "Placeholder image",
+      "copyright": null,
+      "url": "https://images.unsplash.com/photo-1560762484-813fc97650a0?w=900&h=500&fit=crop"
+    },
+    "content": [
+      {
+        "heading": "harness dynamic convergence",
+        "body": [
+          {
+            "type": "paragraph",
+            "text": "Deserunt ex dolore magna elit velit et laboris laborum ut.",
+            "spans": []
+          }
+        ]
+      },
+      {
+        "heading": "mesh compelling users",
+        "body": [
+          {
+            "type": "paragraph",
+            "text": "Nisi ea dolor nostrud cupidatat excepteur nostrud consectetur nostrud. Occaecat ex enim commodo enim duis voluptate proident eiusmod nostrud et sunt ut laboris.",
+            "spans": []
+          }
+        ]
+      },
+      {
+        "heading": "productize one-to-one ROI",
+        "body": [
+          {
+            "type": "paragraph",
+            "text": "Sunt aliqua aliqua id qui eu eu enim excepteur ad aute quis cillum aliqua. Labore velit sint irure do sint ex cupidatat minim quis laborum occaecat incididunt laborum.",
+            "spans": []
+          }
+        ]
+      },
+      {
+        "heading": "strategize back-end e-markets",
+        "body": [
+          {
+            "type": "paragraph",
+            "text": "Labore magna consequat id qui pariatur et irure irure laborum excepteur adipisicing.",
+            "spans": []
+          }
+        ]
+      },
+      {
+        "heading": "orchestrate synergistic metrics",
+        "body": [
+          {
+            "type": "paragraph",
+            "text": "Et laboris aute aliqua excepteur minim sunt sit consectetur reprehenderit. Qui deserunt aliqua consectetur dolor fugiat commodo consequat. Mollit quis et irure ex.",
+            "spans": []
+          }
+        ]
+      },
+      {
+        "heading": "seize distributed applications",
+        "body": [
+          {
+            "type": "paragraph",
+            "text": "Occaecat ut velit nulla adipisicing voluptate sunt incididunt nisi.",
+            "spans": []
+          }
+        ]
+      }
+    ]
+  }
+}
