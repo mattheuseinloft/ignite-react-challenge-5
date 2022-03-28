@@ -1,1 +1,44 @@
-// TODO
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.posts {
+  max-width: 720px;
+
+  a {
+    display: block;
+
+    & + a {
+      margin-top: 3rem;
+    }
+
+    strong {
+      display: block;
+      line-height: 2.118rem;
+
+      font-size: 1.75rem;
+      color: var(--heading-color);
+    }
+
+    p {
+      margin-top: 0.5rem;
+    }
+
+    div {
+      display: flex;
+      align-items: center;
+
+      margin-top: 1.5rem;
+
+      time, span {
+        margin-left: 0.5rem;
+      }
+
+      time + svg {
+        margin-left: 1.5rem;
+      }
+    }
+  }
+}
