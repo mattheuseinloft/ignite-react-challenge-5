@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { FiCalendar, FiUser } from 'react-icons/fi';
 import * as Prismic from '@prismicio/client';
 
+import { useState } from 'react';
 import { getPrismicClient } from '../services/prismic';
 
 import commonStyles from '../styles/common.module.scss';
@@ -28,8 +29,22 @@ interface HomeProps {
   postsPagination: PostPagination;
 }
 
-export default function Home({ postsPagination }: HomeProps): JSX.Element {
-  console.log(postsPagination);
+export default function Home(homeProps: HomeProps): JSX.Element {
+  const [postsPagination, setPostsPagination] = useState(
+    // eslint-disable-next-line react/destructuring-assignment
+    homeProps.postsPagination
+  );
+
+  function handleLoadMorePosts(): void {
+    fetch(postsPagination.next_page)
+      .then(response => response.json())
+      .then(data => {
+        setPostsPagination({
+          next_page: data.next_page,
+          results: [...postsPagination.results, ...data.results],
+        });
+      });
+  }
 
   return (
     <>
@@ -55,6 +70,16 @@ export default function Home({ postsPagination }: HomeProps): JSX.Element {
             </Link>
           ))}
         </div>
+
+        {postsPagination.next_page && (
+          <button
+            onClick={handleLoadMorePosts}
+            className={styles.loadMorePosts}
+            type="button"
+          >
+            Carregar mais posts
+          </button>
+        )}
       </main>
     </>
   );
@@ -67,7 +92,7 @@ export const getStaticProps: GetStaticProps = async () => {
     [Prismic.predicates.at('document.type', 'posts')],
     {
       fetch: ['posts.title', 'posts.subtitle', 'posts.author'],
-      pageSize: 5,
+      pageSize: 1,
     }
   );
 
