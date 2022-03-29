@@ -3,6 +3,8 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { FiCalendar, FiUser } from 'react-icons/fi';
 import * as Prismic from '@prismicio/client';
+import { format } from 'date-fns';
+import ptBR from 'date-fns/locale/pt-BR';
 
 import { useState } from 'react';
 import { getPrismicClient } from '../services/prismic';
@@ -61,7 +63,15 @@ export default function Home(homeProps: HomeProps): JSX.Element {
                 <p>{post.data.subtitle}</p>
                 <div>
                   <FiCalendar />
-                  <time>{post.first_publication_date}</time>
+                  <time>
+                    {format(
+                      new Date(post.first_publication_date),
+                      `dd MMM yyyy`,
+                      {
+                        locale: ptBR,
+                      }
+                    )}
+                  </time>
 
                   <FiUser />
                   <span>{post.data.author}</span>
