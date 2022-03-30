@@ -54,10 +54,10 @@ export default function Home(homeProps: HomeProps): JSX.Element {
         <title>Home | spacetraveling</title>
       </Head>
 
-      <main className={styles.container}>
+      <main className={commonStyles.container}>
         <div className={styles.posts}>
           {postsPagination.results.map(post => (
-            <Link key={post.uid} href={`/posts/${post.uid}`}>
+            <Link key={post.uid} href={`/post/${post.uid}`}>
               <a>
                 <strong>{post.data.title}</strong>
                 <p>{post.data.subtitle}</p>
@@ -108,7 +108,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const posts = postsResponse.results.map(post => {
     return {
-      slug: post.uid,
+      uid: post.uid,
       first_publication_date: post.first_publication_date,
       data: {
         title: post.data.title,
