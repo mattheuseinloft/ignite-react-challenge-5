@@ -61,7 +61,7 @@ export default function Home(homeProps: HomeProps): JSX.Element {
               <a>
                 <strong>{post.data.title}</strong>
                 <p>{post.data.subtitle}</p>
-                <div>
+                <div className={commonStyles.postDetails}>
                   <FiCalendar />
                   <time>
                     {format(

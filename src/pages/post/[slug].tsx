@@ -1,4 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
+import { FiCalendar, FiUser, FiClock } from 'react-icons/fi';
 import * as Prismic from '@prismicio/client';
 import { asHTML } from '@prismicio/helpers';
 import { format } from 'date-fns';
@@ -37,24 +38,24 @@ export default function Post({ post }: PostProps): JSX.Element {
       <img src={post.data.banner.url} alt="banner" />
 
       <div className={commonStyles.container}>
-        <h1>{post.data.title}</h1>
-        <div>
-          {/* <FiCalendar /> */}
+        <h1 className={styles.postTitle}>{post.data.title}</h1>
+        <div className={commonStyles.postDetails}>
+          <FiCalendar />
           <time>
             {format(new Date(post.first_publication_date), `dd MMM yyyy`, {
               locale: ptBR,
             })}
           </time>
 
-          {/* <FiUser /> */}
+          <FiUser />
           <span>{post.data.author}</span>
 
-          {/* Clock icon */}
+          <FiClock />
           <span>Estimated read time</span>
         </div>
 
         {post.data.content.map(content => (
-          <div>
+          <div key={content.heading}>
             <h2>{content.heading}</h2>
 
             <div

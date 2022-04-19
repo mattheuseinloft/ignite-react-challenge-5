@@ -3,3 +3,22 @@
   margin: 0 auto;
   padding: 0 2rem;
 }
+
+.postDetails {
+  display: flex;
+  align-items: center;
+
+  margin-top: 1.5rem;
+
+  time, span {
+    margin-left: 0.5rem;
+  }
+
+  :first-child {
+    margin-left: 0rem;
+  }
+
+  svg {
+    margin-left: 1.5rem;
+  }
+}
