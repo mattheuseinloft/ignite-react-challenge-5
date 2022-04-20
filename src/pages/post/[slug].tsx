@@ -16,7 +16,6 @@ interface Post {
   first_publication_date: string | null;
   data: {
     title: string;
-    subtitle: string;
     banner: {
       url: string;
     };
@@ -28,7 +27,6 @@ interface Post {
       }[];
     }[];
   };
-  uid: string;
 }
 
 interface PostProps {
@@ -116,19 +114,24 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     first_publication_date: response.first_publication_date,
     data: {
       title: response.data.title,
-      subtitle: response.data.subtitle,
       banner: {
         url: response.data.banner?.url ?? '',
       },
       author: response.data.author,
       content: response.data.content,
     },
-    uid: response.uid || String(slug),
   };
 
   return {
     props: {
-      post,
+      post: {
+        ...post,
+        data: {
+          ...post.data,
+          subtitle: response.data.subtitle,
+        },
+        uid: response.uid || String(slug),
+      },
     },
   };
 };
