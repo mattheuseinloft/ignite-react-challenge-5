@@ -37,7 +37,7 @@ export default function Post({ post }: PostProps): JSX.Element {
       {/* {post.data.banner.url && <img src={post.data.banner.url} alt="banner" />} */}
       <img src={post.data.banner.url} alt="banner" />
 
-      <div className={commonStyles.container}>
+      <div className={styles.container}>
         <h1 className={styles.postTitle}>{post.data.title}</h1>
         <div className={commonStyles.postDetails}>
           <FiCalendar />
@@ -55,7 +55,7 @@ export default function Post({ post }: PostProps): JSX.Element {
         </div>
 
         {post.data.content.map(content => (
-          <div key={content.heading}>
+          <div key={content.heading} className={styles.contentGroup}>
             <h2>{content.heading}</h2>
 
             <div

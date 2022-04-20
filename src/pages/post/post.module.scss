@@ -1,6 +1,46 @@
+.container {
+  max-width: 700px;
+  margin: 5rem auto;
+}
+
 .postTitle {
   line-height: 3.625rem;
 
   font-size: 3rem;
   color: var(--heading-color);
+}
+
+.contentGroup {
+  margin-top: 4rem;
+  // max-width: 45.0625rem;
+
+  // line-height: 1.575rem;
+
+  h2 {
+    font-size: 2.25rem;
+    color: var(--heading-color);
+  }
+
+  div {
+    margin-top: 3.15rem;
+    line-height: 1.575rem;
+    text-align: justify;
+    font-size: 1.125rem;
+
+    p {
+      a {
+        color: var(--highlight-color);
+      }
+
+      strong {
+        color: var(--heading-color);
+      }
+    }
+
+    ul {
+      li {
+        margin-top: 1.575rem;
+      }
+    }
+  }
 }
