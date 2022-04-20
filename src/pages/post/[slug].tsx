@@ -1,4 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
+import { useRouter } from 'next/router';
+import { useMemo } from 'react';
 import { FiCalendar, FiUser, FiClock } from 'react-icons/fi';
 import * as Prismic from '@prismicio/client';
 import { asHTML, asText } from '@prismicio/helpers';
@@ -14,6 +16,7 @@ interface Post {
   first_publication_date: string | null;
   data: {
     title: string;
+    subtitle: string;
     banner: {
       url: string;
     };
@@ -24,8 +27,8 @@ interface Post {
         text: string;
       }[];
     }[];
-    estimatedReadTime: number;
   };
+  uid: string;
 }
 
 interface PostProps {
@@ -33,7 +36,24 @@ interface PostProps {
 }
 
 export default function Post({ post }: PostProps): JSX.Element {
-  return (
+  const router = useRouter();
+
+  const estimatedReadTime = useMemo(() => {
+    const totalWords = post.data.content.reduce((prev, curr) => {
+      return (
+        prev +
+        curr.heading.split(/[\s]+/).length +
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        asText(curr.body as any).split(/[\s]+/).length
+      );
+    }, 0);
+
+    return Math.ceil(totalWords / 200);
+  }, [post.data.content]);
+
+  return router.isFallback ? (
+    <h1>Carregando...</h1>
+  ) : (
     <main>
       {/* {post.data.banner.url && <img src={post.data.banner.url} alt="banner" />} */}
       <img className={styles.banner} src={post.data.banner.url} alt="banner" />
@@ -52,7 +72,7 @@ export default function Post({ post }: PostProps): JSX.Element {
           <span>{post.data.author}</span>
 
           <FiClock />
-          <span>{post.data.estimatedReadTime} min</span>
+          <span>{estimatedReadTime} min</span>
         </div>
 
         {post.data.content.map(content => (
@@ -81,7 +101,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     params: { slug: post.uid },
   }));
 
-  return { paths, fallback: false };
+  return { paths, fallback: true };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
@@ -92,27 +112,18 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   console.log(response.data);
 
-  const totalWords = response.data.content.reduce((prev, curr) => {
-    return (
-      prev +
-      curr.heading.split(/[\s]+/).length +
-      asText(curr.body).split(/[\s]+/).length
-    );
-  }, 0);
-  console.log(totalWords);
-  console.log(totalWords / 200);
-
   const post: Post = {
     first_publication_date: response.first_publication_date,
     data: {
       title: response.data.title,
+      subtitle: response.data.subtitle,
       banner: {
         url: response.data.banner?.url ?? '',
       },
       author: response.data.author,
       content: response.data.content,
-      estimatedReadTime: Math.ceil(totalWords / 200),
     },
+    uid: response.uid || String(slug),
   };
 
   return {
