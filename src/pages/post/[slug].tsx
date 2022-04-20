@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { FiCalendar, FiUser, FiClock } from 'react-icons/fi';
 import * as Prismic from '@prismicio/client';
-import { asHTML } from '@prismicio/helpers';
+import { asHTML, asText } from '@prismicio/helpers';
 import { format } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 
@@ -24,6 +24,7 @@ interface Post {
         text: string;
       }[];
     }[];
+    estimatedReadTime: number;
   };
 }
 
@@ -51,7 +52,7 @@ export default function Post({ post }: PostProps): JSX.Element {
           <span>{post.data.author}</span>
 
           <FiClock />
-          <span>Estimated read time</span>
+          <span>{post.data.estimatedReadTime} min</span>
         </div>
 
         {post.data.content.map(content => (
@@ -91,6 +92,16 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   console.log(response.data);
 
+  const totalWords = response.data.content.reduce((prev, curr) => {
+    return (
+      prev +
+      curr.heading.split(/[\s]+/).length +
+      asText(curr.body).split(/[\s]+/).length
+    );
+  }, 0);
+  console.log(totalWords);
+  console.log(totalWords / 200);
+
   const post: Post = {
     first_publication_date: response.first_publication_date,
     data: {
@@ -100,6 +111,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       },
       author: response.data.author,
       content: response.data.content,
+      estimatedReadTime: Math.ceil(totalWords / 200),
     },
   };
 
