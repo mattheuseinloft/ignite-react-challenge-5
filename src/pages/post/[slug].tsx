@@ -35,9 +35,9 @@ export default function Post({ post }: PostProps): JSX.Element {
   return (
     <main>
       {/* {post.data.banner.url && <img src={post.data.banner.url} alt="banner" />} */}
-      <img src={post.data.banner.url} alt="banner" />
+      <img className={styles.banner} src={post.data.banner.url} alt="banner" />
 
-      <div className={styles.container}>
+      <div className={styles.postContainer}>
         <h1 className={styles.postTitle}>{post.data.title}</h1>
         <div className={commonStyles.postDetails}>
           <FiCalendar />
